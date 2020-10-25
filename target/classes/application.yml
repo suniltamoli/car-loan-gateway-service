@@ -1,0 +1,27 @@
+server:
+  port: 8080
+
+spring:
+  cloud:
+    gateway:
+      routes:
+        - id: kyc-service
+          uri: http://localhost:8081/
+          predicates:
+            - Path=/kyc-service/v1/carloan/customer/**
+        - id: loan-officer-service
+          uri: http://localhost:8082/
+          predicates:
+            - Path=/loan-service/v1/carloan/**
+        - id: front-officer-service
+          uri: http://localhost:8083/
+          predicates:
+            - Path=/front-office-service/v1/carloan/**
+        - id: risk-officer-service
+          uri: http://localhost:8084/
+          predicates:
+            - Path=/risk-office-service/v1/carloan/risk/**
+        - id: disbursement-service
+          uri: http://localhost:8085/
+          predicates:
+            - Path=/disbursement-service/v1/carloan/disbursement/**
